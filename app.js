@@ -1,13 +1,15 @@
 const express=require("express");
 const app=express();
 const mongoose=require("mongoose");
+const ejsMate = require('ejs-mate');
 const path=require("path");
 const methodOverride = require('method-override')
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
 app.use(express.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname,"public")));
-app.use(methodOverride('_method'))
+app.use(methodOverride('_method'));
+app.engine('ejs', ejsMate);
 const port=3000;
 const MONGO_URL="mongodb://localhost:27017/wanderlust";
 const Listing=require("./models/listing");
