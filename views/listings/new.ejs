@@ -1,20 +1,42 @@
 <% layout("/layouts/boilerplate") %>
 <body>
+    <br>
     <h1>Create a New Listing:</h1>
-    <form method="post" action="/listings">
-        <!-- listing object bnarhe h uske andar ki keys daalrhe h different different idher  -->
-        <input type="text" name="listing[title]" placeholder="enter title">
-        <br>
-        <textarea placeholder="enter description" name="listing[description]" ></textarea>
-        <br>
-        <input placeholder="enter url of image" name="image" type="listing[text]">
-        <br>
-        <input type="number" name="listing[price]" placeholder="enter price">
-        <br>
-        <input placeholder="enter location" name="listing[location]" type="text">
-        <br>
-        <input placeholder="enter your country" name="listing[country]" type="text">
-        <br>
-        <button>create</button>
-    </form>
+    <br>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <form method="post" action="/listings">
+                <!-- listing object bnarhe h uske andar ki keys daalrhe h different different idher  -->
+                 <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                <input type="text" name="listing[title]" placeholder="Enter Title" class="form-control">
+                 </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea  name="listing[description]" class="form-control" placeholder="Enter Description"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Image</label>
+                    <input name="image" type="listing[text]" placeholder="Enter Image URL/Link" class="form-control">
+                </div>
+                <div class="row">
+                    <div class="mb-3 col-md-4">
+                        <label for="price" class="form-label">Price</label>
+                        <input type="number" name="listing[price]" class="form-control" placeholder="1500">
+                    </div>
+                    <div class="mb-3 col-md-8">
+                        <label for="country" class="form-label">Country</label>
+                        <input class="form-control" name="listing[country]" type="text" placeholder="India">
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="location" class="form-label">Location</label>
+                    <input class="form-control" name="listing[location]" type="text" placeholder="Mathura, Uttar pradesh">
+                </div>
+                <button class="btn btn-dark add-btn">Add</button>
+                <br>
+                <br>
+            </form>
+        </div>   
+    </div>
 </body>
