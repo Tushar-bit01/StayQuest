@@ -85,3 +85,24 @@ body{
     transform: translateY(-2px); 
     transition: all 0.3s ease; 
 }
+/* show page */
+.show-img{
+    height: 30vh ;
+}
+.btns{
+    display: flex;
+}
+.delete-btn {
+    background-color: #1f2937 !important; /* Dark gray */
+    color: white;
+}
+.delete-btn:hover {
+    background-color: #111827;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px); 
+    transition: all 0.3s ease; 
+}
+.show-card{
+    padding-left: 0;
+    padding-right: 0;
+}

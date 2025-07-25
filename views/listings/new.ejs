@@ -1,22 +1,23 @@
 <% layout("/layouts/boilerplate") %>
 <body>
-    <br>
-    <h1>Create a New Listing:</h1>
-    <br>
+    
     <div class="row">
         <div class="col-8 offset-2">
+        <br>
+        <h1>Create a New Listing</h1>
+        <br>
             <form method="post" action="/listings">
                 <!-- listing object bnarhe h uske andar ki keys daalrhe h different different idher  -->
                  <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
-                <input type="text" name="listing[title]" placeholder="Enter Title" class="form-control">
+                <input type="text" name="listing[title]" placeholder="Add a catchy title" class="form-control">
                  </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
                     <textarea  name="listing[description]" class="form-control" placeholder="Enter Description"></textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="image" class="form-label">Image</label>
+                    <label for="image" class="form-label">Image Link</label>
                     <input name="image" type="listing[text]" placeholder="Enter Image URL/Link" class="form-control">
                 </div>
                 <div class="row">
