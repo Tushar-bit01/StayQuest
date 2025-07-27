@@ -4,6 +4,7 @@ const mongoose=require("mongoose");
 const ejsMate = require('ejs-mate');
 const path=require("path");
 const methodOverride = require('method-override')
+const wrapAsync=require("./utils/wrapAsync");
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
 app.use(express.urlencoded({extended:true}));
@@ -33,7 +34,7 @@ app.get("/listings/new",(req,res)=>{
     res.render("listings/new");
 })
 //post/create route to send created data in db from server form and then to show on home page by redirecting
-app.post("/listings",async(req,res)=>{
+app.post("/listings",wrapAsync(async(req,res,next)=>{
     // let {title,description,price,location ,country,image}=req.body;
     // let newListing=new Listing({
     //     title,
@@ -43,10 +44,11 @@ app.post("/listings",async(req,res)=>{
     //     country
     // })
     //method 2- listing object se name liye h uske andar object mein keys mein h saare already bas insert krdo vo object sidhe
-    let newListing=new Listing(req.body.listing)
+    
+    let newListing=new Listing(req.body.listing);
     await newListing.save();
     res.redirect("/listings");
-})
+}))
 //show route to show specific data
 app.get("/listings/:id",async(req,res)=>{
     let {id}=req.params;
@@ -73,6 +75,9 @@ app.delete("/listings/:id",async(req,res)=>{
     let deleteListing=await Listing.findByIdAndDelete(id);
     console.log(deleteListing);
     res.redirect("/listings");
+})
+app.use((err,req,res,next)=>{
+    res.send("something went wrong")
 })
 app.listen(port,()=>{
     console.log(`connection successfully established at ${port}`);
