@@ -23,7 +23,13 @@ const listingSchema=new Schema({
     },
     country:{
         type:String
-    }
+    },
+    reviews:[
+        {
+            type:Schema.Types.ObjectId,
+            rel:"Review",
+        }
+    ]   
 })
 const Listing=mongoose.model("Listing",listingSchema);//model create krdega yani collection bnadege mongodb mein
 module.exports=Listing;

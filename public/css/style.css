@@ -106,3 +106,24 @@ body{
     padding-left: 0;
     padding-right: 0;
 }
+/* stars of rating */
+.star-rating {
+    direction: rtl;
+    display: inline-flex;
+    font-size: 1.5rem;
+}
+.star-rating input {
+    display: none;
+}
+.star-rating label {
+    color: #ccc;
+    cursor: pointer;
+}
+.star-rating input:checked ~ label {
+    color: gold;
+}
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    color: gold;
+}
+

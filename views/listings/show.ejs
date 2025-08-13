@@ -2,15 +2,14 @@
 <body>
     <div class="row mt-3">
         <div class="col-8 offset-3">
-            <h1>Listing Details:</h1>
+            <h1 style="font-weight: 700;"><%= listing.title %></h1>
             <br>
         </div>
     <div class="card col-6 offset-3 show-card">
         <img src="<%= listing.image %>" class="card-img-top show-img mb-2" alt="listing_image">
         <div class="card-body">
           <p class="card-text">
-            <b style="font-size: 1.25rem;"><%= listing.title %></b>
-            <br>
+            
             <div class="mt-1">
                 <b>About:</b> <%= listing.description %>
             </div>
@@ -34,5 +33,26 @@
         <button class="btn btn-dark offset-5 delete-btn">Delete</button>
     </form>
     </div>  
+    <br>
+    <hr>
+    <div class="col-8 offset-3">
+        <h3>Leave a Review</h3>
+        <form>
+            <div class="mb-3 mt-3">
+                <label for="rating" class="form-label">Rating</label>
+                <div class="star-rating">
+                    <% for (let i = 5; i >= 1; i--) { %>
+                        <input type="radio" id="star<%= i %>" name="review[rating]" value="<%= i %>">
+                        <label for="star<%= i %>" title="<%= i %> stars">&#9733;</label>
+                    <% } %>
+                </div>
+            </div>
+            <div class="mb-3 mt-3">
+                <label for="review" class="form-label">Comments</label>
+                <textarea id="review" name="review[comment]" class="form-control" cols="30" rows="5">Write your review here..</textarea>
+            </div>
+            <button class="btn btn-outline-dark">Submit</button>
+        </form>
+    </div>
     <br>
 </body>
