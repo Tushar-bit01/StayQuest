@@ -28,7 +28,7 @@
     <br> 
     </div>
     <div class="btns">
-        <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark col-md-1 offset-3 add-btn">Edit</a>
+        <a href="/listings/<%= listing.id %>/edit" class="btn btn-dark col-md-1 offset-3 add-btn">Edit</a>
     <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
         <button class="btn btn-dark offset-5 delete-btn">Delete</button>
     </form>
@@ -37,7 +37,7 @@
     <hr>
     <div class="col-8 offset-3">
         <h3>Leave a Review</h3>
-        <form>
+        <form action="/listings/<%= listing.id %>/reviews" method="post">
             <div class="mb-3 mt-3">
                 <label for="rating" class="form-label">Rating</label>
                 <div class="star-rating">
@@ -49,7 +49,7 @@
             </div>
             <div class="mb-3 mt-3">
                 <label for="review" class="form-label">Comments</label>
-                <textarea id="review" name="review[comment]" class="form-control" cols="30" rows="5">Write your review here..</textarea>
+                <textarea id="review" name="review[comment]" class="form-control" cols="30" rows="5" placeholder="Write your review here.."></textarea>
             </div>
             <button class="btn btn-outline-dark">Submit</button>
         </form>

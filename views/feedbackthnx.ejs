@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You - StayQuest</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(254, 66, 77, 0.1);
+            padding: 60px 40px;
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #fe424d, #ff6b6b);
+        }
+
+        .checkmark {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #fe424d, #ff6b6b);
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 2s infinite;
+            box-shadow: 0 10px 30px rgba(254, 66, 77, 0.3);
+        }
+
+        .checkmark svg {
+            width: 40px;
+            height: 40px;
+            stroke: white;
+            stroke-width: 3;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .checkmark-path {
+            stroke-dasharray: 20;
+            stroke-dashoffset: 20;
+            animation: checkmark 1s ease-in-out forwards;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            color: #6c757d;
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .message {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 40px;
+            border-left: 4px solid #fe424d;
+        }
+
+        .message p {
+            color: #495057;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #fe424d, #ff6b6b);
+            color: white;
+            box-shadow: 0 4px 15px rgba(254, 66, 77, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(254, 66, 77, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #6c757d;
+            border: 2px solid #e9ecef;
+        }
+
+        .btn-secondary:hover {
+            border-color: #fe424d;
+            color: #fe424d;
+            transform: translateY(-1px);
+        }
+
+        .stars {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            opacity: 0.1;
+        }
+
+        .star {
+            color: #fe424d;
+            font-size: 1.5rem;
+            animation: twinkle 2s infinite;
+        }
+
+        .star:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .star:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes checkmark {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.1;
+            }
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 40px 24px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="stars">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+        </div>
+
+        <div class="checkmark">
+            <svg viewBox="0 0 24 24">
+                <path class="checkmark-path" d="M20 6L9 17l-5-5"/>
+            </svg>
+        </div>
+
+        <h1>Thank You!</h1>
+        <p class="subtitle">Your feedback means the world to us</p>
+
+        <div class="message">
+            <p>🎉 Your review has been successfully submitted! We truly appreciate you taking the time to share your experience with our community.</p>
+        </div>
+
+        <div class="actions">
+            <a href="/listings" class="btn btn-primary">
+                <span>Browse More Listings</span>
+            </a>
+            <a href="/listings/<%-id%>" class="btn btn-secondary">
+                <span>Go Back</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Add a subtle entrance animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.container');
+            container.style.transform = 'translateY(20px)';
+            container.style.opacity = '0';
+            
+            setTimeout(() => {
+                container.style.transition = 'all 0.6s ease';
+                container.style.transform = 'translateY(0)';
+                container.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>

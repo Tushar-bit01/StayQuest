@@ -16,6 +16,7 @@ app.engine('ejs', ejsMate);
 const port=3000;
 const MONGO_URL="mongodb://localhost:27017/wanderlust";
 const Listing=require("./models/listing");
+const Review=require("./models/review.js");
 main()
 .then(res=>console.log("connection success with db wanderlust"))
 .catch(err=>console.log(err));
@@ -70,7 +71,7 @@ app.post("/listings",validateListing,wrapAsync(async(req,res,next)=>{
 //show route to show specific data
 app.get("/listings/:id",wrapAsync(async(req,res)=>{
     let {id}=req.params;
-    console.log(id);
+    // console.log(id);
     let listing = await Listing.findById(id);
     res.render("listings/show.ejs",{listing});
 }))
@@ -78,7 +79,7 @@ app.get("/listings/:id",wrapAsync(async(req,res)=>{
 app.get("/listings/:id/edit",wrapAsync(async(req,res)=>{
     let {id}=req.params;
     const listing=await Listing.findById(id);
-    console.log(listing);
+    // console.log(listing);
     res.render("listings/edit",{listing})
 }))
 //update route
@@ -98,6 +99,19 @@ app.delete("/listings/:id",wrapAsync(async(req,res)=>{
     console.log(deleteListing);
     res.redirect("/listings");
 }))
+//reviews
+//post route
+app.post("/listings/:id/reviews", async(req,res)=>{
+    let {id} = req.params;
+    let listing = await Listing.findById(id);
+    let newReview = new Review(req.body.review);
+    listing.reviews.push(newReview);
+    await newReview.save();
+    
+    await listing.save();
+    
+    res.render("feedbackthnx.ejs",{id});
+});
 app.use((req, res, next) => {
     next(new ExpressError(404, "page not found"));
 });
