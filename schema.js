@@ -11,3 +11,11 @@ module.exports.listingSchema = Joi.object({
     }).required(),
     image: Joi.string().allow("").optional() // Place image here, at root level
 });
+module.exports.reviewSchema=Joi.object({
+    review:Joi.object(//ye review form reviw[] wala review h 
+        {
+            rating:Joi.number().required().min(1).max(5),
+            comment:Joi.string().required()
+        }
+    ).required()
+})

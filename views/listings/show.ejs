@@ -37,19 +37,22 @@
     <hr>
     <div class="col-8 offset-3">
         <h3>Leave a Review</h3>
-        <form action="/listings/<%= listing.id %>/reviews" method="post">
+        <form action="/listings/<%= listing.id %>/reviews" method="post" novalidate class="needs-validation">
             <div class="mb-3 mt-3">
                 <label for="rating" class="form-label">Rating</label>
                 <div class="star-rating">
                     <% for (let i = 5; i >= 1; i--) { %>
-                        <input type="radio" id="star<%= i %>" name="review[rating]" value="<%= i %>">
+                        <input type="radio" id="star<%= i %>" name="review[rating]" value="<%= i %>" <%= i === 5 ? 'checked' : '' %>>
                         <label for="star<%= i %>" title="<%= i %> stars">&#9733;</label>
                     <% } %>
                 </div>
             </div>
             <div class="mb-3 mt-3">
                 <label for="review" class="form-label">Comments</label>
-                <textarea id="review" name="review[comment]" class="form-control" cols="30" rows="5" placeholder="Write your review here.."></textarea>
+                <textarea id="review" name="review[comment]" class="form-control" cols="30" rows="5" placeholder="Write your review here.." required></textarea>
+                <div class="invalid-feedback">
+                    Please write review before submitting
+                </div>
             </div>
             <button class="btn btn-outline-dark">Submit</button>
         </form>
