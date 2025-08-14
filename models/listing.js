@@ -27,7 +27,7 @@ const listingSchema=new Schema({
     reviews:[
         {
             type:Schema.Types.ObjectId,
-            rel:"Review",
+            ref:"Review",
         }
     ]   
 })

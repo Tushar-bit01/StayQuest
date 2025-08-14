@@ -81,7 +81,8 @@ app.post("/listings",validateListing,wrapAsync(async(req,res,next)=>{
 app.get("/listings/:id",wrapAsync(async(req,res)=>{
     let {id}=req.params;
     // console.log(id);
-    let listing = await Listing.findById(id);
+    let listing = await Listing.findById(id).populate("reviews");
+    console.log(listing);
     res.render("listings/show.ejs",{listing});
 }))
 // edit route
