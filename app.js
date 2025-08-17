@@ -90,7 +90,7 @@ app.get("/listings/:id/edit",wrapAsync(async(req,res)=>{
     let {id}=req.params;
     const listing=await Listing.findById(id);
     // console.log(listing);
-    res.render("listings/edit",{listing})
+    res.render("listings/edit",{listing});
 }))
 //update route
 app.put("/listings/:id",validateListing,wrapAsync(async(req,res)=>{
@@ -125,7 +125,7 @@ app.post("/listings/:id/reviews",validateReview,wrapAsync( async(req,res)=>{
 //delete review route
 app.delete("/listings/:id/reviews/:reviewId",wrapAsync(async(req,res)=>{
     let {id,reviewId}=req.params;
-    await Listing.findByIdAndUpdate(id,{$pull:{reviews:reviewId}});
+    await Listing.findByIdAndUpdate(id,{$pull:{reviews:reviewId}}); 
     await Review.findByIdAndDelete(reviewId);
     res.redirect(`/listings/${id}`);
 }))
