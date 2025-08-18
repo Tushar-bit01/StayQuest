@@ -17,6 +17,7 @@ const port=3000;
 const MONGO_URL="mongodb://localhost:27017/wanderlust";
 const Listing=require("./models/listing");
 const Review=require("./models/review.js");
+const listings=require("./routes/listing.js");
 main()
 .then(res=>console.log("connection success with db wanderlust"))
 .catch(err=>console.log(err));
@@ -44,71 +45,7 @@ const validateReview=(req,res,next)=>{
 app.get("/",(req,res)=>{
     res.send("working");
 })
-// index or home route
-app.get("/listings",wrapAsync(async(req,res)=>{
-    const allListing=await Listing.find();
-    res.render("listings/index.ejs",{allListing});
-}))
-
-//new route to create new listing
-app.get("/listings/new",(req,res)=>{
-    res.render("listings/new");
-})
-//post/create route to send created data in db from server form and then to show on home page by redirecting
-app.post("/listings",validateListing,wrapAsync(async(req,res,next)=>{
-    // let {title,description,price,location ,country,image}=req.body;
-    // let newListing=new Listing({
-    //     title,
-    //     description,
-    //     price,
-    //     location,
-    //     country
-    // })
-    //method 2- listing object se name liye h uske andar object mein keys mein h saare already bas insert krdo vo object sidhe
-    // if(!req.body.listing){
-    //     return next(new ExpressError(400,"Send Valid data for listing"));
-    //     // throw new ExpressError("Send Valid data for listing");
-    // }
-    // let result=listingSchema.validate(req.body);
-    // if(result.error){
-    //     return next(new ExpressError(400,result.error));
-    // }
-    let newListing=new Listing(req.body.listing);
-    await newListing.save();
-    res.redirect("/listings");
-}))
-//show route to show specific data
-app.get("/listings/:id",wrapAsync(async(req,res)=>{
-    let {id}=req.params;
-    // console.log(id);
-    let listing = await Listing.findById(id).populate("reviews");
-    console.log(listing);
-    res.render("listings/show.ejs",{listing});
-}))
-// edit route
-app.get("/listings/:id/edit",wrapAsync(async(req,res)=>{
-    let {id}=req.params;
-    const listing=await Listing.findById(id);
-    // console.log(listing);
-    res.render("listings/edit",{listing});
-}))
-//update route
-app.put("/listings/:id",validateListing,wrapAsync(async(req,res)=>{
-    // if(!req.body.listing){
-    //     // return next(new ExpressError(404,"Send Valid data for listing"));
-    //     throw new ExpressError(400,"Send Valid data for listing");
-    // }
-    let {id}=req.params;
-    await Listing.findByIdAndUpdate(id,{...req.body.listing});
-    res.redirect(`/listings/${id}`);
-}))
-//delete route
-app.delete("/listings/:id",wrapAsync(async(req,res)=>{
-    let {id}=req.params;
-    let deleteListing=await Listing.findByIdAndDelete(id);
-    console.log(deleteListing);
-    res.redirect("/listings");
-}))
+app.use("/listings",listings);
 //reviews
 //post route
 app.post("/listings/:id/reviews",validateReview,wrapAsync( async(req,res)=>{
