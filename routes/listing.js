@@ -3,8 +3,7 @@ const router=express.Router();
 const Listing=require("../models/listing");
 const wrapAsync=require("../utils/wrapAsync");
 const ExpressError=require("../utils/ExpressError");
-const {listingSchema}=require("../schema.js");
-
+const {listingSchema}=require("../schema.js")
 const validateListing=(req,res,next)=>{
     let {error}=listingSchema.validate(req.body);
     if(error){
@@ -46,6 +45,7 @@ router.post("/",validateListing,wrapAsync(async(req,res,next)=>{
     // }
     let newListing=new Listing(req.body.listing);
     await newListing.save();
+    req.flash("sucess","New Listing Created!");
     res.redirect("/listings");
 }))
 //show route to show specific data
@@ -70,12 +70,14 @@ router.put("/:id",validateListing,wrapAsync(async(req,res)=>{
     // }
     let {id}=req.params;
     await Listing.findByIdAndUpdate(id,{...req.body.listing});
+    req.flash("sucess","Listing Updated Successfully!");
     res.redirect(`/listings/${id}`);
 }))
 //delete route
 router.delete("/:id",wrapAsync(async(req,res)=>{
     let {id}=req.params;
     let deleteListing=await Listing.findByIdAndDelete(id);
+    req.flash("sucess","Listing Deleted!");
     console.log(deleteListing);
     res.redirect("/listings");
 }));
