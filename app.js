@@ -37,8 +37,9 @@ app.use(methodOverride('_method'));
 app.engine('ejs', ejsMate);
 const port=3000;
 const MONGO_URL="mongodb://localhost:27017/wanderlust";
-const listings=require("./routes/listing.js");
-const reviews=require("./routes/review.js");
+const listingRouter=require("./routes/listing.js");
+const reviewRouter=require("./routes/review.js");
+const userRouter=require("./routes/user.js");
 main()
 .then(res=>console.log("connection success with db wanderlust"))
 .catch(err=>console.log(err));
@@ -53,8 +54,9 @@ app.use((req,res,next)=>{
     res.locals.error=req.flash("error");
     next();
 })
-app.use("/listings",listings);
-app.use("/listings/:id/reviews",reviews);
+app.use("/listings",listingRouter);
+app.use("/",userRouter);
+app.use("/listings/:id/reviews",reviewRouter);
 app.use((req, res, next) => {
     next(new ExpressError(404, "page not found"));
 });
