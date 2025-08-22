@@ -5,6 +5,9 @@ const ejsMate = require('ejs-mate');
 const path=require("path");
 const methodOverride = require('method-override')
 const ExpressError=require("./utils/ExpressError");
+const passport=require('passport');
+const localStrategy=require('passport-local');
+const User=require('./models/user.js');
 const session=require('express-session');
 const flash=require('connect-flash');
 const sessionOptions={
@@ -19,6 +22,13 @@ const sessionOptions={
 }
 app.use(session(sessionOptions));
 app.use(flash());
+
+app.use(passport.initialize());
+app.use(passport.session());
+// use static serialize and deserialize of model for passport session support
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
 app.use(express.urlencoded({extended:true}));
