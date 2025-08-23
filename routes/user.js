@@ -17,13 +17,17 @@ router.post("/signup",wrapAsync(async (req,res)=>{
     });
     const registeredUser=await User.register(newUser,password);
     console.log(registeredUser);
-    req.flash("sucess","Welcome to StayQuest!");
-    res.redirect("/listings");
+    req.login(registeredUser,(err)=>{
+        if(err){
+            return next(err)
+        }
+        req.flash("sucess","Welcome to StayQuest!");
+        res.redirect("/listings");
+    })
     } catch(e){
         req.flash("error",e.message);
         res.redirect("/signup");
     }
-    
 }));
 
 router.get("/login",(req,res)=>{
@@ -32,7 +36,7 @@ router.get("/login",(req,res)=>{
 
 router.post("/login",passport.authenticate("local",{failureRedirect:"/login",failureFlash:true}),async (req,res)=>{
     req.flash("sucess","Welcome back to StayQuest!");
-    res.redirect("/listings");
+    res.redirect(req.session.redirectUrl);
 });
 
 router.get("/logout",(req,res,next)=>{
