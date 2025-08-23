@@ -20,6 +20,13 @@ const sessionOptions={
         httpOnly:true,
     }
 }
+
+app.set("view engine","ejs");
+app.set("views",path.join(__dirname,"views"));
+app.use(express.urlencoded({extended:true}));
+app.use(express.static(path.join(__dirname,"public")));
+app.use(methodOverride('_method'));
+app.engine('ejs', ejsMate);
 app.use(session(sessionOptions));
 app.use(flash());
 
@@ -29,13 +36,6 @@ passport.use(new localStrategy(User.authenticate()));
 // use static serialize and deserialize of model for passport session support
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-
-app.set("view engine","ejs");
-app.set("views",path.join(__dirname,"views"));
-app.use(express.urlencoded({extended:true}));
-app.use(express.static(path.join(__dirname,"public")));
-app.use(methodOverride('_method'));
-app.engine('ejs', ejsMate);
 const port=3000;
 const MONGO_URL="mongodb://localhost:27017/wanderlust";
 const listingRouter=require("./routes/listing.js");

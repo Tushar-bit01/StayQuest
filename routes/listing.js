@@ -3,7 +3,8 @@ const router=express.Router();
 const Listing=require("../models/listing");
 const wrapAsync=require("../utils/wrapAsync");
 const ExpressError=require("../utils/ExpressError");
-const {listingSchema}=require("../schema.js")
+const {listingSchema}=require("../schema.js");
+const {isLoggedIn}=require("../middleware.js");
 const validateListing=(req,res,next)=>{
     let {error}=listingSchema.validate(req.body);
     if(error){
@@ -21,7 +22,7 @@ router.get("/",wrapAsync(async(req,res)=>{
 }))
 
 //new route to create new listing
-router.get("/new",(req,res)=>{
+router.get("/new",isLoggedIn,(req,res)=>{
     res.render("listings/new");
 })
 //post/create route to send created data in db from server form and then to show on home page by redirecting
@@ -60,7 +61,8 @@ router.get("/:id",wrapAsync(async(req,res)=>{
     console.log(listing);
     res.render("listings/show.ejs",{listing});
 }))
-router.get("/:id/edit",wrapAsync(async(req,res)=>{
+//edit route
+router.get("/:id/edit",isLoggedIn,wrapAsync(async(req,res)=>{
     let {id}=req.params;
     const listing=await Listing.findById(id);
     if(!listing){
@@ -71,7 +73,7 @@ router.get("/:id/edit",wrapAsync(async(req,res)=>{
     res.render("listings/edit",{listing});
 }))
 //update route
-router.put("/:id",validateListing,wrapAsync(async(req,res)=>{
+router.put("/:id",isLoggedIn,validateListing,wrapAsync(async(req,res)=>{
     // if(!req.body.listing){
     //     // return next(new ExpressError(404,"Send Valid data for listing"));
     //     throw new ExpressError(400,"Send Valid data for listing");
