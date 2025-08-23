@@ -1,15 +1,54 @@
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/"><i class="fa-regular fa-compass"></i></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-link" href="/">Home</a>
-          <a class="nav-link" href="/listings">All listing</a>
-          <a class="nav-link" href="/listings/new">Add new listing</a>
+  <div class="container-fluid">
+    <!-- Brand -->
+    <a class="navbar-brand" href="/"><i class="fa-regular fa-compass"></i></a>
+
+    <!-- Hamburger -->
+    <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Collapsed/Expanded content -->
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav w-100">
+        
+        <!-- LEFT SIDE (desktop) -->
+        <div class="d-md-flex flex-grow-1">
+          <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/listings">All listings</a></li>
+          <li class="nav-item"><a class="nav-link" href="/listings/new">Add new listing</a></li>
         </div>
-      </div>
+
+        <!-- RIGHT SIDE (desktop) / TOP (mobile) -->
+        <div class="ms-md-auto">
+          <% if(currUser){ %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-regular fa-user-circle fa-lg"></i>
+                <span class="ms-1"><%= currUser.username %></span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+                <li><a class="dropdown-item" href="/profile">My Profile</a></li>
+                <li><a class="dropdown-item" href="/settings">Settings</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="/logout">Log out</a></li>
+              </ul>
+            </li>
+          <% } else { %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="guestMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-regular fa-user-circle fa-lg "></i>
+                <span class="ms-1">Account</span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="guestMenu">
+                <li><a class="dropdown-item" href="/signup">Sign up</a></li>
+                <li><a class="dropdown-item" href="/login">Login</a></li>
+              </ul>
+            </li>
+          <% } %>
+        </div>
+
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>

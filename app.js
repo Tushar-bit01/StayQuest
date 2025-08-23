@@ -53,6 +53,7 @@ app.get("/",(req,res)=>{
 app.use((req,res,next)=>{
     res.locals.success=req.flash("sucess");
     res.locals.error=req.flash("error");
+    res.locals.currUser=req.user;
     next();
 })
 app.use("/listings",listingRouter);

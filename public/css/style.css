@@ -19,6 +19,27 @@ body{
 .nav-link{
     color: #222222 !important;
 }
+.usr-icon{
+    height: 40px !important;
+}
+/* Make hamburger clearly visible */
+.custom-toggler {
+    border: none;
+    background-color: #f1f1f1; /* light gray background */
+    padding: 6px 10px;
+    border-radius: 6px;
+  }
+  .custom-toggler:focus {
+    box-shadow: none;
+  }
+  
+  /* Ensure collapsed menu pushes content down, not overlap */
+  .navbar-collapse {
+    background-color: white; /* gives menu a white background */
+    padding: 1rem;           /* some breathing space */
+  }
+  
+
 /* footer */
 .f-info-links a{
     text-decoration: none;
