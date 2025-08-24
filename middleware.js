@@ -1,9 +1,16 @@
 const Listing=require("./models/listing");
+const Review=require("./models/review.js");
 const ExpressError=require("./utils/ExpressError");
 const {listingSchema,reviewSchema}=require("./schema.js");
 module.exports.isLoggedIn=(req,res,next)=>{
+    // console.log(req.user);
     if(!req.isAuthenticated()){
-        req.session.redirectUrl=req.originalUrl;
+        if (req.originalUrl.includes('/reviews') ) {
+            const listingId = req.params.id;
+            req.session.redirectUrl = `/listings/${listingId}`;
+        } else {
+            req.session.redirectUrl = req.originalUrl;
+        }
         req.flash("error","User must be logged in to access this Features!");
         return res.redirect("/login");
     }
@@ -20,6 +27,15 @@ module.exports.isOwner=async(req,res,next)=>{
     let listing=await Listing.findById(id);
     if(!listing.owner.equals(res.locals.currUser._id)){
         req.flash("error","You cannot make changes in others Listing!");
+        return res.redirect(`/listings/${id}`);
+    }
+    next();
+};
+module.exports.isReviewAuthor=async(req,res,next)=>{
+    let {id,reviewId}=req.params;
+    let review=await Review.findById(reviewId);
+    if(!review.author.equals(res.locals.currUser._id)){
+        req.flash("error","You cannot Delete others Review!");
         return res.redirect(`/listings/${id}`);
     }
     next();
