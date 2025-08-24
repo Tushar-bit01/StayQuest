@@ -8,8 +8,12 @@
     <div class="card col-6 offset-3 show-card listing-card">
         <img src="<%= listing.image %>" class="card-img-top show-img mb-2" alt="listing_image">
         <div class="card-body">
-          <p class="card-text">
-            
+          <div class="card-text">
+
+            <p class="text-end text-muted mb-1 mt-0">
+                <small><i>~Owner: <%= listing.owner.username %></i></small>
+              </p>
+              
             <div class="mt-1">
                 <b>About:</b> <%= listing.description %>
             </div>
@@ -22,7 +26,7 @@
             <div class="mt-1">
                 <b>Country:</b> <%= listing.country %>
             </div>     
-        </p>
+        </div>
         </div>
       </div>
     <br> 

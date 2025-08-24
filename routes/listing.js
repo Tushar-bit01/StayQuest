@@ -26,7 +26,7 @@ router.get("/new",isLoggedIn,(req,res)=>{
     res.render("listings/new");
 })
 //post/create route to send created data in db from server form and then to show on home page by redirecting
-router.post("/",validateListing,wrapAsync(async(req,res,next)=>{
+router.post("/",isLoggedIn,validateListing,wrapAsync(async(req,res,next)=>{
     // let {title,description,price,location ,country,image}=req.body;
     // let newListing=new Listing({
     //     title,
@@ -45,6 +45,7 @@ router.post("/",validateListing,wrapAsync(async(req,res,next)=>{
     //     return next(new ExpressError(400,result.error));
     // }
     let newListing=new Listing(req.body.listing);
+    newListing.owner=req.user._id;
     await newListing.save();
     req.flash("sucess","New Listing Created!");
     res.redirect("/listings");
@@ -53,7 +54,7 @@ router.post("/",validateListing,wrapAsync(async(req,res,next)=>{
 router.get("/:id",wrapAsync(async(req,res)=>{
     let {id}=req.params;
     // console.log(id);
-    let listing = await Listing.findById(id).populate("reviews");
+    let listing = await Listing.findById(id).populate("reviews").populate("owner");
     if(!listing){
         req.flash("error","Listing you are trying to access does not exist!");
         return res.redirect("/listings");
@@ -84,7 +85,7 @@ router.put("/:id",isLoggedIn,validateListing,wrapAsync(async(req,res)=>{
     res.redirect(`/listings/${id}`);
 }))
 //delete route
-router.delete("/:id",wrapAsync(async(req,res)=>{
+router.delete("/:id", isLoggedIn, wrapAsync(async(req,res)=>{
     let {id}=req.params;
     let deleteListing=await Listing.findByIdAndDelete(id);
     req.flash("sucess","Listing Deleted!");

@@ -1,5 +1,4 @@
 module.exports.isLoggedIn=(req,res,next)=>{
-    console.log(req.user);
     if(!req.isAuthenticated()){
         req.session.redirectUrl=req.originalUrl;
         req.flash("error","User must be logged in to access this Features!");
