@@ -40,8 +40,12 @@ module.exports.createListing=async(req,res,next)=>{
     // if(result.error){
     //     return next(new ExpressError(400,result.error));
     // }
+    let url=req.file.path;
+    let filename=req.file.filename;
+    // console.log(url ,"..",filename);
     let newListing=new Listing(req.body.listing);
     newListing.owner=req.user._id;
+    newListing.image={url,filename};
     await newListing.save();
     req.flash("sucess","New Listing Created!");
     res.redirect("/listings");

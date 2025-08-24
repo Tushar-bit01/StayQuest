@@ -4,10 +4,12 @@ const Listing=require("../models/listing");
 const wrapAsync=require("../utils/wrapAsync");
 const {isLoggedIn,isOwner,validateListing}=require("../middleware.js");
 const listingController=require("../controllers/listing.js");
+const multer  = require('multer');
+const {storage}=require("../cloudConfig.js");
+const upload = multer({  storage });
 router.route("/")
 .get(wrapAsync(listingController.index))// index or home route
-.post(isLoggedIn,validateListing,wrapAsync(listingController.createListing));//post/create route to send created data in db from server form and then to show on home page by redirecting
-
+.post(isLoggedIn,upload.single('listing[image]'),validateListing,wrapAsync(listingController.createListing));//post/create route to send created data in db from server form and then to show on home page by redirecting
 //new route to create new listing
 router.get("/new",isLoggedIn,listingController.renderNewForm);
 
