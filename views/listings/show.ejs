@@ -64,6 +64,7 @@
         </form>
         <hr>
         <p><b>All Reviews</b></p>
+        <% if(listing.reviews.length>0) {%>
         <div class="row ">
             <% for(review of listing.reviews){ %>
                 <div class="card review-card col-5 mb-3 ms-3">
@@ -85,6 +86,10 @@
                 </div>
               <% } %>
     </div>
+    <% } %>
+    <% if(listing.reviews.length===0){ %>
+      <p>No reviews yet..</p>
+      <% } %>
 </div>
     <br>
 </body>
