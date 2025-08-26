@@ -12,7 +12,7 @@ router.route("/")
 .post(isLoggedIn,upload.single('listing[image]'),validateListing,wrapAsync(listingController.createListing));//post/create route to send created data in db from server form and then to show on home page by redirecting
 //new route to create new listing
 router.get("/new",isLoggedIn,listingController.renderNewForm);
-router.get("/filters/:filter",listingController.renderFilersListing);
+router.get("/filters/:filter",listingController.renderFiltersListing);
 router.route("/:id")
 .get(wrapAsync(listingController.showListing))//show route to show specific data
 .put(isLoggedIn,isOwner,isLoggedIn,upload.single('listing[image]'),validateListing,wrapAsync(listingController.updateListing))//update route

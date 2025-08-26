@@ -18,7 +18,11 @@ module.exports.listingSchema = Joi.object({
                                "Amazing pools",
                                "Camping",
                                "Farms",
-                               "Arctic"
+                               "Arctic",
+                               "Spa",
+                               "Gaming",
+                               "Monument",
+                               "Hotel"
                            )
                        ),
         // Remove image from here

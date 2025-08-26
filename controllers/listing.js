@@ -3,11 +3,10 @@ module.exports.index=async(req,res)=>{
     const allListing=await Listing.find();
     res.render("listings/index.ejs",{allListing});
 };
-module.exports.renderFilersListing=async (req,res)=>{
+module.exports.renderFiltersListing=async (req,res)=>{
     let {filter}=req.params;
-    // console.log(filter);
     const filteredListing = await Listing.find({ categories: { $in: [filter] } });
-
+    // console.log(filteredListing);
     res.render("listings/filter",{filteredListing,filter});
 }
 module.exports.renderNewForm=(req,res)=>{
