@@ -6,22 +6,41 @@ module.exports.index=async(req,res)=>{
 module.exports.renderNewForm=(req,res)=>{
     res.render("listings/new");
 };
-module.exports.showListing=async(req,res)=>{
-    let {id}=req.params;
-    // console.log(id);
+module.exports.showListing = async (req, res) => {
+    let { id } = req.params;
     let listing = await Listing.findById(id).populate({
-        path:"reviews",
-        populate:{
-            path:"author"
+        path: "reviews",
+        populate: {
+            path: "author"
         }
     }).populate("owner");
-    if(!listing){
-        req.flash("error","Listing you are trying to access does not exist!");
+
+    if (!listing) {
+        req.flash("error", "Listing you are trying to access does not exist!");
         return res.redirect("/listings");
     }
-    console.log(listing);
-    res.render("listings/show.ejs",{listing});
+
+    // ✅ Geocoding (Nominatim API se)
+    try {
+        const response = await fetch(
+            `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${listing.location}`,
+            {
+                headers: { "User-Agent": "wanderlust-app" } // nominatim ke liye zaroori
+            }
+        );
+        const data = await response.json();
+        console.log(data);
+        if (data.length > 0) {
+            listing.lat = data[0].lat;
+            listing.lon = data[0].lon;
+        }
+    } catch (err) {
+        console.error("Geocoding error:", err);
+    }
+
+    res.render("listings/show.ejs", { listing });
 };
+
 module.exports.createListing=async(req,res,next)=>{
     // let {title,description,price,location ,country,image}=req.body;
     // let newListing=new Listing({

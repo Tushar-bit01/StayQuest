@@ -165,4 +165,9 @@ body{
 .star-rating label:hover ~ label {
     color: gold;
 }
+/* map */
+#map { 
+    height: 25rem;
+    width:90vh;
+ }
 

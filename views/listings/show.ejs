@@ -91,5 +91,32 @@
       <p>No reviews yet..</p>
       <% } %>
 </div>
-    <br>
+<hr>
+<div class="col-8 offset-3">
+  <h2>Where you'll be</h2>
+  <div id="map"></div>
+</div>
+    <br> 
+    <script>
+      const lat = "<%= listing.lat || 28.6139 %>";
+      const lon = "<%= listing.lon || 77.2090 %>";
+      const locationName = "<%= listing.location %>";
+    
+      var map = L.map('map').setView([lat, lon], 14);
+    
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(map);
+      
+      let myIcon = L.icon({
+    iconUrl: 'https://img.icons8.com/?size=96&id=j6fro4Um6uAH&format=png',
+    iconSize: [40, 40],
+    iconAnchor: [22, 94],
+    popupAnchor: [-3, -76],
+});
+      L.marker([lat, lon], {icon: myIcon}).addTo(map)
+        .bindPopup(`<b>You'll stay here!</b>`)
+        .openPopup();
+    </script>
 </body>

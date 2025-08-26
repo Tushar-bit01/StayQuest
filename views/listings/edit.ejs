@@ -45,24 +45,24 @@
                         Enter a valid Price
                     </div>
                     </div>
-                    
                     <div class="mb-3 col-md-8">
-                        <label for="country" class="form-label">Country</label>
-                    <input value="<%= listing.location %>" name="listing[location]" type="text" class="form-control" required>
-                    <div class="invalid-feedback">
-                        Enter a valid Country
+                        <label for="location" class="form-label">Location</label>
+                        <input value="<%= listing.location %>" name="listing[location]" type="text" class="form-control" required>
+                        <div class="invalid-feedback">
+                            Enter a valid Location
+                        </div>
                     </div>
-                    </div>
+                    
+                </div>
+                <div class="mb-3 ">
+                    <label for="country" class="form-label">Country</label>
+                <input value="<%= listing.country %>" name="listing[country]" type="text" class="form-control" required>
+                <div class="invalid-feedback">
+                    Enter a valid Country
+                </div>
                 </div>
                 
-                
-                <div class="mb-3">
-                    <label for="location" class="form-label">Location</label>
-                    <input value="<%= listing.country %>" name="listing[country]" type="text" class="form-control" required>
-                    <div class="invalid-feedback">
-                        Enter a valid Location
-                    </div>
-                </div>
+               
                 <button class="btn btn-dark add-btn">Save changes</button>
                 <br><br>
             </form>
