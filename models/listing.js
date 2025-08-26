@@ -33,6 +33,11 @@ const listingSchema=new Schema({
             ref:"Review",
         }
     ],
+    categories:[{
+        type: String,
+        enum: ["Trending","Rooms","Iconic City","Mountain","Castles","Amazing pools","Camping","Farms","Arctic"]
+    }],
+    
     owner:{
         type:Schema.Types.ObjectId,
         ref:"User",

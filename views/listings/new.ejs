@@ -1,5 +1,20 @@
 <% layout("/layouts/boilerplate") %>
-<body>
+<style >
+    .btn-outline-danger-black {
+    color: black;            /* override red text */
+    border: 1px solid black;  
+    border-radius: 1rem;     /* keep red border */
+  }
+
+  .btn-outline-danger-black:hover {
+    color: white;            
+    background-color: #fe424d;   
+    border-color: #fe424d;
+  }
+  .dropdown-menu li {
+    margin-bottom: 5px;
+  }
+</style>
     
     <div class="row">
         <div class="col-8 offset-2">
@@ -31,6 +46,73 @@
                     <label for="image" class="form-label">Upload Listing image</label>
                     <input id="image" name="listing[image]" type="file" placeholder="Enter Image URL/Link" class="form-control" required>
                 </div>
+                <div class="mb-3">
+                    <label class="form-label">Categories</label>
+                    <div class="dropdown">
+                      <button class="btn-outline-danger-black w-100 dropdown-toggle" type="button" id="categoriesDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        Select Categories
+                      </button>
+                      <ul class="dropdown-menu p-3" aria-labelledby="categoriesDropdown">
+                        <li>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Trending" id="catTrending" name="listing[categories][]">
+                            <label class="form-check-label" for="catTrending">Trending</label>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Rooms" id="catRooms" name="listing[categories][]">
+                            <label class="form-check-label" for="catRooms">Rooms</label>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Iconic City" id="catIconicCity" name="listing[categories][]">
+                            <label class="form-check-label" for="catIconicCity">Iconic City</label>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Mountain" id="catMountain" name="listing[categories][]">
+                            <label class="form-check-label" for="catMountain">Mountain</label>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Castles" id="catCastles" name="listing[categories][]">
+                            <label class="form-check-label" for="catCastles">Castles</label>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Amazing pools" id="catPools" name="listing[categories][]">
+                            <label class="form-check-label" for="catPools">Amazing pools</label>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Camping" id="catCamping" name="listing[categories][]">
+                            <label class="form-check-label" for="catCamping">Camping</label>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Farms" id="catFarms" name="listing[categories][]">
+                            <label class="form-check-label" for="catFarms">Farms</label>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Arctic" id="catArctic" name="listing[categories][]">
+                            <label class="form-check-label" for="catArctic">Arctic</label>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="invalid-feedback">
+                      Select at least one category
+                    </div>
+                  </div>
                 <div class="row">
                     <div class="mb-3 col-md-4">
                         <label for="price" class="form-label">Price</label>
@@ -57,10 +139,11 @@
                         Enter a valid Country
                       </div>
                 </div>
+                
                 <button class="btn btn-dark add-btn">Add</button>
                 <br>
                 <br>
             </form>
         </div>   
     </div>
-</body>
+

@@ -7,6 +7,20 @@ module.exports.listingSchema = Joi.object({
         location: Joi.string().required(),
         country: Joi.string().required(),
         price: Joi.number().required().min(0),
+        categories: Joi.array()
+                       .items(
+                           Joi.string().valid(
+                               "Trending",
+                               "Rooms",
+                               "Iconic City",
+                               "Mountain",
+                               "Castles",
+                               "Amazing pools",
+                               "Camping",
+                               "Farms",
+                               "Arctic"
+                           )
+                       ),
         // Remove image from here
     }).required(),
     image: Joi.string().allow("").optional() // Place image here, at root level

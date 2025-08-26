@@ -51,7 +51,7 @@ async function main(){
     await mongoose.connect(MONGO_URL);
 }
 app.get("/",(req,res)=>{
-    res.send("working");
+    res.redirect("/listings");
 })
 app.use((req,res,next)=>{
     res.locals.success=req.flash("sucess");
