@@ -39,6 +39,11 @@
       display: flex;
       justify-content: center;
   }
+  .pfp-img-nav{
+    height: 2.25rem;
+    width: 2.25rem;
+    border-radius: 50%;
+  }
 </style>
   
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
@@ -79,12 +84,17 @@
 
         <% if(currUser){ %>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fa-regular fa-user-circle fa-lg"></i>
+            <a class="nav-link dropdown-toggle d-flex align-items-center" href="/profile" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <% if(currUser.pfp.url){ %>
+                <img class="pfp-img-nav" src="<%=currUser.pfp.url  %>">
+                <% }else{ %>
+                  <img src="https://i.pinimg.com/1200x/f3/23/33/f323338233ea1ef3e83ad205919f7a3a.jpg" alt="User profile picture" class="pfp-img-nav">
+                  <% } %>
+             
               <span class="ms-1"><%= currUser.username %></span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
-              <li><a class="dropdown-item" href="/profile">My Profile</a></li>
+              <li><a class="dropdown-item" href="/profile/<%= currUser._id %>">My Profile</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="/logout">Log out</a></li>
             </ul>

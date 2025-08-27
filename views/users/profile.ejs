@@ -1,0 +1,133 @@
+<% layout("/layouts/boilerplate") %>
+<style>
+  .profile-container {
+    display: flex;
+    justify-content: center;
+    margin: 3rem auto;
+    padding: 0 1rem;
+  }
+
+  .profile-card {
+    background-color: #fff;
+    padding: 30px 35px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+  }
+
+  .profile-card h1 {
+    font-family: "Style Script", cursive;
+    font-size: 4rem;
+    color: #262626;
+    margin-bottom: 20px;
+  }
+
+  .profile-card img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #dbdbdb;
+    margin-bottom: 15px;
+  }
+
+  .profile-card h2 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 6px;
+  }
+
+  .profile-card .email {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+  }
+
+  .profile-card .bio {
+    font-size: 15px;
+    color: #444;
+    margin-bottom: 20px;
+    line-height: 1.4;
+    font-style: italic;
+    white-space: pre-wrap;
+  }
+
+  .profile-card .about {
+    text-align: left;
+    background: #fafafa;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  .profile-card .about h3 {
+    font-size: 18px;
+    color: #0095f6;
+    margin-bottom: 8px;
+  }
+
+  .profile-card .about p {
+    font-size: 15px;
+    color: #333;
+    line-height: 1.5;
+  }
+
+  /* Edit Button */
+  .edit-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 25px;
+  background-color: #fe424d;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  
+}
+  @media (max-width: 600px) {
+    .profile-card {
+      padding: 25px 20px;
+    }
+    .profile-card h1 {
+      font-size: 26px;
+    }
+    .profile-card img {
+      width: 100px;
+      height: 100px;
+    }
+  }
+</style>
+
+<div class="profile-container">
+  <div class="profile-card">
+    <h1>Profile</h1>
+    <% if(userData.pfp.url){ %>
+    <img src="<%= userData.pfp.url %>" alt="User profile picture">
+    <% } else { %>
+        <img src="https://i.pinimg.com/1200x/f3/23/33/f323338233ea1ef3e83ad205919f7a3a.jpg" alt="User profile picture">
+        <% } %>
+    <h2><%= userData.username %></h2>
+    <div class="email"><%= userData.email %></div>
+
+    <% if(userData.bio){ %>
+      <p class="bio"><%= userData.bio %></p>
+    <% } else { %>
+      <p class="bio">N/A</p>
+    <% } %>
+
+    <div class="about">
+      <h3>About</h3>
+      <% if(userData.about){ %>
+        <p><%= userData.about %></p>
+      <% } else { %>
+        <p>N/A</p>
+      <% } %>
+    </div>
+
+    <!-- Edit Profile Button -->
+    <a href="/profile/<%= currUser._id %>/edit" class="edit-btn">Edit Profile <i class="fa-solid fa-pencil"></i></a>
+  </div>
+</div>

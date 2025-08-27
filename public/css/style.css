@@ -59,35 +59,302 @@ body{
   
 
 /* footer */
-.f-info-links a{
-    text-decoration: none;
-    color: #222222;
+.main-content {
+    min-height: calc(100vh - 300px);
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
-.f-info-links a:hover{
-    text-decoration: underline;
+
+.content-placeholder {
+    text-align: center;
+    color: #666;
+    font-size: 1.2rem;
+}
+
+footer {
+    background: linear-gradient(135deg, #ebebeb 0%, #d5d5d5 100%);
+    color: #222222;
+    padding: 3rem 0 1.5rem;
+    margin-top: auto;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.footer-main {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 3rem;
+    margin-bottom: 2rem;
+}
+
+.footer-section h3 {
+    color: #000000;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.footer-section h3::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background: linear-gradient(90deg, #000000, #666666);
+}
+
+.company-info {
+    max-width: 280px;
+}
+
+.company-info p {
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    color: #444;
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 0.7rem;
+}
+
+.footer-links a {
+    color: #222222;
+    text-decoration: none;
+    font-weight: 400;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.footer-links a:hover {
     color: #000000;
     font-weight: 600;
-    transition: 0.25s ease-in-out;
+    transform: translateX(5px);
 }
-.f-info{
-    text-align: center;
-    height: 8rem;
-    background-color: #ebebeb;
+
+.social-links {
     display: flex;
-    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.social-links a {
+    display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    color: #222222;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
 }
-.f-info-links .f-info-socials{
-    width: 100%;
+
+.social-links a:hover {
+    background: rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
+    color: #000000;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.contact-info {
+    color: #444;
+    line-height: 1.8;
+}
+
+.contact-info i {
+    width: 20px;
+    color: #666;
+    margin-right: 0.5rem;
+}
+
+.contact-info a {
+    color: #222222;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-info a:hover {
+    color: #000000;
+    font-weight: 600;
+}
+
+.footer-bottom {
+    border-top: 1px solid #d0d0d0;
+    padding-top: 1.5rem;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
-.f-info-socials i{
-    font-size: 1.25rem;
-    margin-right: 1rem;
+
+.footer-bottom-links {
+    display: flex;
+    gap: 2rem;
 }
-.f-info-links a{
-    margin-left: 0.9rem;
+
+.footer-bottom-links a {
+    color: #222222;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.footer-bottom-links a:hover {
+    color: #000000;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.copyright {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .footer-main {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+    
+    .company-info {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        padding: 0 1rem;
+    }
+
+    .footer-main {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+
+    .footer-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .company-info {
+        text-align: center;
+    }
+
+    .company-info p {
+        text-align: center;
+    }
+
+    .footer-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .contact-info {
+        text-align: center;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .footer-bottom-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+
+    footer {
+        padding: 2rem 0 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-main {
+        gap: 1.5rem;
+        text-align: center;
+    }
+
+    .footer-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-section h3::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .footer-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .contact-info {
+        text-align: center;
+    }
+
+    .social-links a {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+
+    .footer-bottom-links {
+        gap: 0.8rem;
+    }
+
+    .footer-bottom-links a {
+        font-size: 0.8rem;
+    }
+}
+
+/* Hover animations */
+.footer-section {
+    transition: transform 0.3s ease;
+}
+
+.footer-section:hover {
+    transform: translateY(-2px);
+}
+
+/* Loading animation for social icons */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.social-links a:hover {
+    animation: pulse 0.6s ease-in-out;
 }
 /* cards */
 .listing-card{
@@ -166,12 +433,27 @@ body{
     color: gold;
 }
 /* map */
-#map { 
-    height: 25rem;
-    width:90vh;
- }
+#map {
+    width: 100%;
+    height: 400px;   /* default for desktops */
+    border-radius: 10px;
+  }
+  
+  /* Tablets */
+  @media (max-width: 992px) {
+    #map {
+      height: 300px;
+    }
+  }
+  
+  /* Mobiles */
+  @media (max-width: 576px) {
+    #map {
+      height: 200px;
+    }
+  }
  .leaflet-control-attribution {
     font-size: 10px; 
     opacity: 0.01;    
   }
-
+  

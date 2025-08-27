@@ -1,0 +1,135 @@
+<% layout("/layouts/boilerplate") %>
+<style>
+  .edit-container {
+    display: flex;
+    justify-content: center;
+    margin: 3rem auto;
+    padding: 0 1rem;
+  }
+
+  .edit-card {
+    background-color: #fff;
+    padding: 30px 35px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+  }
+
+  .edit-card h1 {
+    font-family: "Style Script", cursive;
+    font-size: 4rem;
+    color: #262626;
+    margin-bottom: 20px;
+  }
+
+  .edit-card img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #dbdbdb;
+    margin-bottom: 20px;
+  }
+
+  label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="file"],
+  textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 15px;
+    background-color: #fafafa;
+    transition: border-color 0.2s ease;
+  }
+
+  input:focus,
+  textarea:focus {
+    outline: none;
+    border-color: #333;
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .save-btn {
+    display: inline-block;
+    text-align: center;
+    padding: 12px 20px;
+    border-radius: 25px;
+    background-color: #fe424d;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+  }
+
+  @media (max-width: 600px) {
+    .edit-card {
+      padding: 25px 20px;
+    }
+    .edit-card h1 {
+      font-size: 24px;
+    }
+    .edit-card img {
+      width: 100px;
+      height: 100px;
+    }
+  }
+</style>
+
+<div class="edit-container">
+  <div class="edit-card">
+    <h1>Edit Profile</h1>
+
+    <!-- Current Profile Picture -->
+     <% if(currUser.pfp.url) {%>
+    <img src="<%= currUser.pfp.url %>" alt="User profile picture">
+<% }else{ %>
+    <img src="https://i.pinimg.com/1200x/f3/23/33/f323338233ea1ef3e83ad205919f7a3a.jpg" alt="User profile picture">
+    <% } %>
+    <form action="/profile/<%= currUser._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+      
+      <!-- Image Upload -->
+      <div>
+        <label for="pfp">Profile Picture</label>
+        <input type="file" id="pfp" name="user[pfp]">
+      </div>
+
+      <!-- Email -->
+      <div>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="user[email]" value="<%= currUser.email %>">
+      </div>
+
+      <!-- Bio -->
+      <div>
+        <label for="bio">Bio</label>
+        <textarea id="bio" name="user[bio]"><%= currUser.bio %></textarea>
+      </div>
+
+      <!-- About -->
+      <div>
+        <label for="about">About</label>
+        <textarea id="about" name="user[about]"><%= currUser.about %></textarea>
+      </div>
+
+      <!-- Save Button -->
+      <button type="submit" class="save-btn">Save Changes</button>
+    </form>
+  </div>
+</div>

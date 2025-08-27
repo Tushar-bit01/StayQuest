@@ -44,3 +44,37 @@ module.exports.logout=(req,res,next)=>{
        res.redirect("/listings");
     })
 };
+module.exports.profile=async(req,res)=>{
+    let {id}=req.params;
+    console.log(id);
+    let userData=await User.findById(id);
+    console.log(userData);
+    if(userData){
+        res.render("users/profile",{userData});
+    }else{
+        res.render("error","Login to access this feature");
+    }
+    
+}
+module.exports.profileEditRender=async(req,res)=>{
+    let {id}=req.params;
+    let userData=await User.findById(id);
+    if(userData){
+        res.render("users/edit",{userData});
+    }else{
+        req.flash("error","Login to access this feature");
+        res.redirect("/listings");
+    }
+};
+module.exports.editProfile=async(req,res)=>{
+    let {id}=req.params;
+    let user=await User.findByIdAndUpdate(id,{...req.body.user});
+    if(req.file){
+        let url=req.file.path;
+        let filename=req.file.filename;
+    user.pfp={url,filename};
+    await user.save();
+    }
+    req.flash("sucess","Profile Updated Successfully!");
+    res.redirect(`/profile/${id}`);
+}

@@ -7,6 +7,16 @@ const userSchema=new Schema({
     email:{
         type:String,
         required:true
+    },
+    bio:{
+        type:String
+    },
+    about:{
+        type:String
+    },
+    pfp:{
+        url:String,
+        filename:String,
     }
 });
 userSchema.plugin(passportLocalMongoose);
