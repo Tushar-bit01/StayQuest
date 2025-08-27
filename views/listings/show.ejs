@@ -131,7 +131,7 @@
                     <% } %>
                     <h6 class="review-author mb-0">&nbsp; &nbsp;@<%= review.author.username %></h6>
                   </div>
-                  <p class="review-comment flex-grow-1 ms-4"><%= review.comment %></p>
+                  <p class="review-comment flex-grow-1 ms-4 me-2"><%= review.comment %></p>
                   <p class="review-stars mb-2 ms-4">
                     <% for(let i=1; i<=5; i++){ %>
                       <%= i <= review.rating ? "★" : "☆" %>
@@ -152,6 +152,7 @@
         <p>No reviews yet..</p>
       <% } %>
     </div>
+    <hr>
 <div class="col-8 offset-2">
   <h3>Where you'll be</h3>
   <br>
