@@ -1,3 +1,46 @@
+<style>
+  .explore{
+    margin-right: 2rem; /* reduced so center looks balanced */
+  }
+  .navbar{
+      height: 5rem;
+      background-color: white;
+  }
+  .fa-compass{
+      color: #fe424d;
+      font-size: 2rem;
+  }
+  .nav-link{
+      color: #222222 !important;
+  }  
+  .search-btn{
+      background-color: #fe424d;
+      color: white;
+      border-radius: 25px;
+      padding: 0 1rem;
+  }
+  .search-btn:hover{
+      background-color: #ff444d;
+      color: white;
+  }
+  .search-btn i{
+      display: inline;
+      margin-right: 0.5rem;
+  }
+  .search-input{
+      border-radius: 25px;
+      padding: 0.5rem 3rem;
+      width: 100%;        /* mobile me full width */
+      max-width: 400px;
+  }
+  /* Center the search form always */
+  .navbar .search-form {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+  }
+</style>
+  
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
   <div class="container-fluid">
     <!-- Brand -->
@@ -10,12 +53,26 @@
 
     <!-- Collapsed/Expanded content -->
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav w-100">
+      <ul class="navbar-nav w-100 align-items-center">
         
-        <!-- LEFT SIDE (desktop) -->
-        <li class="nav-item"><a class="nav-link" href="/listings">Explore</a></li>
+        <!-- LEFT SIDE -->
+        <li class="nav-item explore">
+          <a class="nav-link" href="/listings">Explore</a>
+        </li>
 
-        <!-- RIGHT SIDE (desktop) / TOP (mobile) -->
+        <!-- SEARCH (centered always) -->
+        <li class="nav-item flex-grow-1">
+          <form class="d-flex search-form" role="search" action="/listings/searchresults">
+            <input class="form-control me-2 search-input" type="search" name="q" 
+                   placeholder="Search destinations" aria-label="Search"
+                   value="<%= typeof query !== 'undefined' ? query : '' %>"/>
+            <button class="btn search-btn" type="submit">
+              <i class="fa-solid fa-magnifying-glass"></i>Search
+            </button>
+          </form>
+        </li>
+
+        <!-- RIGHT SIDE -->
         <li class="nav-item ms-md-auto me-2">
           <a class="nav-link" href="/listings/new">StayQuest your home</a>
         </li>
@@ -28,7 +85,6 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
               <li><a class="dropdown-item" href="/profile">My Profile</a></li>
-              <li><a class="dropdown-item" href="/settings">Settings</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="/logout">Log out</a></li>
             </ul>

@@ -9,6 +9,19 @@ module.exports.renderFiltersListing=async (req,res)=>{
     // console.log(filteredListing);
     res.render("listings/filter",{filteredListing,filter});
 }
+module.exports.renderSearchResults=async (req,res)=>{
+    let searchQuery = req.query.q; // yahan se mila "Delhi"
+
+    let listings = await Listing.find({
+      $or: [
+        { title: { $regex: searchQuery, $options: "i" } },
+        { country: { $regex: searchQuery, $options: "i" } },
+        { location: { $regex: searchQuery, $options: "i" } }
+      ]
+    });
+  
+    res.render("listings/search", { listings, searchQuery });
+}
 module.exports.renderNewForm=(req,res)=>{
     res.render("listings/new");
 };
