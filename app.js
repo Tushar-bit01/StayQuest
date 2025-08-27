@@ -11,10 +11,23 @@ const ExpressError=require("./utils/ExpressError");
 const passport=require('passport');
 const localStrategy=require('passport-local');
 const User=require('./models/user.js');
+const dbUrl=process.env.ATLASDB_URL;
 const session=require('express-session');
+const MongoStore = require('connect-mongo');
 const flash=require('connect-flash');
+const store=MongoStore.create({
+    mongoUrl:dbUrl,
+    crypto:{
+        secret:process.env.SECRET,
+    },
+    touchAfter:24*3600,
+});
+store.on("error",()=>{
+    console.log("error in mongo session store",error);
+});
 const sessionOptions={
-    secret:"mysecretkey",
+    store,
+    secret:process.env.SECRET,
     resave:false,
     saveUninitialized:true,
     cookie:{
@@ -44,11 +57,12 @@ const MONGO_URL="mongodb://localhost:27017/wanderlust";
 const listingRouter=require("./routes/listing.js");
 const reviewRouter=require("./routes/review.js");
 const userRouter=require("./routes/user.js");
+
 main()
 .then(res=>console.log("connection success with db wanderlust"))
 .catch(err=>console.log(err));
 async function main(){
-    await mongoose.connect(MONGO_URL);
+    await mongoose.connect(dbUrl);
 }
 app.get("/",(req,res)=>{
     res.redirect("/listings");

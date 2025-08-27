@@ -28,11 +28,11 @@
   }
 </style>
     <div class="row mt-3">
-        <div class="col-8 offset-3">
+        <div class="col-8 offset-2">
             <h1 style="font-weight: 700;"><%= listing.title %></h1>
             <br>
         </div>
-    <div class="card col-6 offset-3 show-card listing-card ">
+    <div class="card col-8 offset-2 show-card listing-card ">
         <img src="<%= listing.image.url %>" class="card-img-top show-img mb-2" alt="listing_image">
         <div class="card-body">
           <div class="card-text">
@@ -68,7 +68,7 @@
     <% } %>
     </form>  
     <hr>
-    <div class="col-8 offset-3">
+    <div class="col-8 offset-2">
         <h3>Leave a Review</h3>
         <form action="/listings/<%= listing.id %>/reviews" method="post" novalidate class="needs-validation">
             <div class="mb-3 mt-3">
@@ -102,7 +102,7 @@
                     <% } else { %>
                       <img src="https://i.pinimg.com/1200x/f3/23/33/f323338233ea1ef3e83ad205919f7a3a.jpg" alt="User profile picture" id="pfp-img-nav">
                     <% } %>
-                    <h6 class="review-author mb-0">@<%= review.author.username %></h6>
+                    <h6 class="review-author mb-0">&nbsp; &nbsp;@<%= review.author.username %></h6>
                   </div>
                   <p class="review-comment"><%= review.comment %></p>
                   <p class="review-stars">
@@ -125,7 +125,7 @@
       <p>No reviews yet..</p>
       <% } %>
 </div>
-<div class="col-8 offset-3">
+<div class="col-8 offset-2">
   <h3>Where you'll be</h3>
   <br>
   <div id="map"></div>

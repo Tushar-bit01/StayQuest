@@ -48,7 +48,7 @@ module.exports.showListing = async (req, res) => {
             }
         );
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
         if (data.length > 0) {
             listing.lat = data[0].lat;
             listing.lon = data[0].lon;
